@@ -6,7 +6,6 @@ import Webcam from "react-webcam";
 
 const App = () => {
 
-  const lisser = 200 ;
   const webcamRef = React.useRef(null);
 
   const Container = styled.div`
@@ -19,16 +18,17 @@ const App = () => {
 
   const Slider = styled.div`
     width:700px ;
-    height: auto ;
+    height: 100% ;
     position: absolute;
     top: 20vh;
-    left: ${lisser}px; 
-
+    left: 200px; 
+    
+    z-index:4
   `
 
   const moveContainer = (e) => {
     var cnt = 7
-    if(e.target.id == "lisser") {
+    if(e.target.id === "lisser") {
       cnt = document.getElementById('brr').getBoundingClientRect().x - 20 ;
     } else {
       cnt = document.getElementById('brr').getBoundingClientRect().x + 20 ;
@@ -41,12 +41,13 @@ const App = () => {
 
 
   return (
-    <><Container>
+    <><button id="lisser" onClick={moveContainer}>LISSER</button>
+    <button id="limen" onClick={moveContainer}>LIMEN</button>
+    <Container>
         <Slider id="brr">
-          <Webcam audio={false} ref={webcamRef} />
+          <Webcam  audio={false} ref={webcamRef} />
         </Slider>
-        <button id="lisser" onClick={moveContainer}>LISSER</button>
-        <button id="limen" onClick={moveContainer}>LIMEN</button>
+        
       </Container>
     </>
   );
